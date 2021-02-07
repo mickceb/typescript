@@ -105,12 +105,3 @@ const sum = (val1: number, val2: number) => {
   return val1 + val2
 }
 ```
-## InteliSense
-```
-let pseudo = 'machin'
-let age = 45
-let isAdmin = true
-
-// IntelliSense
-pseudo.         => VsCode propose des méthodes adaptées à son type (string).
-```
