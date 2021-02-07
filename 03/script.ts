@@ -1,9 +1,7 @@
-/* var age = 20
-console.log(age)
-
-var age = 50
-console.log(age) */
-
-// Let + Const
-let age = 20
-console.log(age)
+let car = {
+  color: 'red',
+  date: 2020,
+  speed: 500
+}
+car.porte = 4
+console.log(car)
