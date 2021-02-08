@@ -31,8 +31,22 @@ enum Level {
  }
 ```
 
-
 ## [Type Any](https://www.typescriptlang.org/docs/handbook/basic-types.html#any)
+
+Via any TS n'impose aucun type particulier. On peut y stocker tous les types.
+A utiliser avec modération, par exemple quand on ne sait pas quel type de data on récupère d'une API.
+```
+let anyData: any = 'hello'
+console.log(typeof anyData) // string
+let anyData: any = 12
+console.log(typeof anyData) // number
+let anyData: any = true
+console.log(typeof anyData) // boolean
+
+// cet array peut contenir n'importe quel type de valeur
+let anyDataArray: any[] = []
+```
+
 
 ## [Type Unknown](https://www.typescriptlang.org/docs/handbook/basic-types.html#unknown)
 

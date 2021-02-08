@@ -1,10 +1,4 @@
 /*
- ADMIN = 0
- MODERATOR = 1
- SUPPORT = 2
- USER_READ_ONLY = 3
- */
-
  enum Level {
   ADMIN,
   MODERATOR,
@@ -32,4 +26,7 @@
  }
 
  let x = colors[1]
- console.log(x)
+ console.log(x) */
+
+let anyData: any = 'hello'
+console.log(typeof anyData) // string
