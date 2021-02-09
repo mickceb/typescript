@@ -188,7 +188,21 @@ const result = talking(helen, "Je m'appelle");
 console.log(result);
 ```
 
-## Interfaces avec les classes
+## [Interfaces avec les classes](https://www.typescriptlang.org/docs/handbook/interfaces.html#class-types)
+
+`class Mother implements InterfaceA`
+En implémentant une interface à une classe, on s'assure que l'objet instancié est conforme aux spécificités définies dans l'interface.
+
+```
+interface PlayerTalk {
+  talk(): string;
+}
+class Player implements PlayerTalk {
+  constructor(readonly name: string, private age: number) {}
+}
+
+// TS Error: La classe 'Player' implémente de manière incorrecte l'interface 'PlayerTalk'. La propriété 'talk' est absente du type 'Player' mais obligatoire dans le type 'PlayerTalk'.
+```
 
 ## Propriétés et méthodes en Static
 

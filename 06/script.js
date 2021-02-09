@@ -137,7 +137,6 @@ var Person = /** @class */ (function () {
     return Person;
 }());
 var henri = new Person("Henri", 72);
-console.log(henri);
 var helen;
 helen = {
     name: "Helen",
@@ -150,4 +149,11 @@ var talking = function (a, b) {
     return a.speak(b);
 };
 var result = talking(helen, "Je m'appelle");
-console.log(result);
+var Player = /** @class */ (function () {
+    function Player(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    return Player;
+}());
+var homer = new Player("Homer", 42);

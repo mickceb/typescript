@@ -136,7 +136,7 @@ class Person {
 }
 
 const henri = new Person("Henri", 72);
-console.log(henri);
+//console.log(henri);
 
 interface Persons {
   name: string;
@@ -158,4 +158,18 @@ const talking = (a: Persons, b: string) => {
 };
 
 const result = talking(helen, "Je m'appelle");
-console.log(result);
+//console.log(result);
+
+// Interfaces avec les classes
+interface PlayerTalk {
+  talk(): string;
+}
+class Player implements PlayerTalk {
+  constructor(readonly name: string, private age: number) {}
+
+  /* talk() {
+    return `Je m'appelle ${this.name}`;
+  } */
+}
+
+let homer = new Player("Homer", 42);
