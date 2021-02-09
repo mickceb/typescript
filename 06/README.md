@@ -120,7 +120,73 @@ console.log(child3.getEyes());
 
 ## Readonly
 
-## Interfaces
+Peut être modifié uniquement via le `constructor` ou l'instanciation de la `class`.
+
+```
+class Car {
+
+  constructor(c: string, public gears: number) {
+    this.color = c;
+  }
+
+  setColor(color: string) {
+    this.color = color; // TS Error: Impossible d'effectuer une assignation à 'color', car il s'agit d'une propriété en lecture seule.
+  }
+}
+
+const ford = new Car('white', 4);
+const greenColor = (ford.color = "green"); // TS Error: Impossible d'effectuer une assignation à 'color', car il s'agit d'une propriété en lecture seule.
+
+const opel = new Car("blue", 5);
+console.log(opel) // color: 'blue, gears: 5
+```
+
+## [Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html)
+
+Définir les contraintes d'un objet.
+
+```
+class Person {
+  name: string;
+  age: number;
+
+  constructor(n: string, e: number) {
+    this.name = n;
+    this.age = e;
+  }
+
+  speak() {
+    console.log(
+      `Je me présente, je m'appelle ${this.name} et j'ai ${this.age} ans.`
+    );
+  }
+}
+
+const henri = new Person("Henri", 72);
+console.log(henri);
+
+interface Persons {
+  name: string;
+  age?: number;
+  speak(a: string): string; // Type: string + return: string
+}
+
+let helen: Persons;
+helen = {
+  name: "Helen",
+  age: 24,
+  speak(a: string): string {
+    return a + " " + this.name;
+  },
+};
+
+const talking = (a: Persons, b: string) => {
+  return a.speak(b);
+};
+
+const result = talking(helen, "Je m'appelle");
+console.log(result);
+```
 
 ## Interfaces avec les classes
 

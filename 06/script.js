@@ -104,9 +104,50 @@ var Children2 = /** @class */ (function (_super) {
     };
     return Children2;
 }(Mother2));
-var child3 = new Children2("Marcel", "vert", 2);
+/* const child3 = new Children2("Marcel", "vert", 2);
 console.log(child3.getName());
 child3.setName("Maurice");
 console.log(child3.getName());
 child3.getSpeak();
-console.log(child3.getEyes());
+console.log(child3.getEyes()); */
+// Readonly
+var Car = /** @class */ (function () {
+    function Car(c, gears) {
+        this.gears = gears;
+        this.color = c;
+    }
+    Car.prototype.setColor = function (color) {
+        this.color = color; // TS Error: Impossible d'effectuer une assignation à 'color', car il s'agit d'une propriété en lecture seule.
+    };
+    return Car;
+}());
+var ford = new Car("white", 4);
+var greenColor = (ford.color = "green"); // TS Error: Impossible d'effectuer une assignation à 'color', car il s'agit d'une propriété en lecture seule.
+var opel = new Car("blue", 5);
+//console.log(opel); // color: 'blue, gears: 5
+// Interfaces
+var Person = /** @class */ (function () {
+    function Person(n, e) {
+        this.name = n;
+        this.age = e;
+    }
+    Person.prototype.speak = function () {
+        console.log("Je me pr\u00E9sente, je m'appelle " + this.name + " et j'ai " + this.age + " ans.");
+    };
+    return Person;
+}());
+var henri = new Person("Henri", 72);
+console.log(henri);
+var helen;
+helen = {
+    name: "Helen",
+    age: 24,
+    speak: function (a) {
+        return a + " " + this.name;
+    }
+};
+var talking = function (a, b) {
+    return a.speak(b);
+};
+var result = talking(helen, "Je m'appelle");
+console.log(result);
