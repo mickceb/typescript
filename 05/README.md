@@ -185,7 +185,53 @@ Définir d'abord les paramètres obligatoires puis les facultatifs. En revanche,
 
 ## [Type Rest](https://www.typescriptlang.org/docs/handbook/functions.html#rest-parameters)
 
+Les paramètres obligatoires, facultatifs et par défaut ont une chose en commun : ils font référence à un paramètre à la fois.
+Parfois, on souhaite travailler avec plusieurs paramètres (paramètres groupés), ou bien on ne connaît pas le nombre de paramètre qu'une fonction exige.
+
+En JS, on a la variable argument:
+
+```
+let colors = function () {
+  console.log(arguments);
+};
+colors("green", "red", "orange");
+// Arguments(3) ["green", "red", "orange"]
+```
+
+En TS:
+
+```
+let colors = function (arg1: string, ...restOfColors: string[]) {
+  console.log(...restOfColors);
+};
+colors("green", "red", "orange", "purple", "black");
+// red, orange, purple, black
+```
+
+Le 2nd argument `...restOfColors` est un `array` de `string`, il accepte plusieurs arguments mais uniquement s'ils ont pour type `string`.
+
+```
+function buildName(firstName: string, ...restOfName: string[]) {
+  return firstName + " " + restOfName.join(" ")
+}
+
+let buildNameFun: (fnam: string, ...rest: string[]) => string = buildName
+```
+
+La variable `buildNameFun` est une `function` acceptant plusieurs arguments. Le 1st doit être de type `string` de même que tous les suivants (`...rest`).
+
 ## Callback function Type
+
+```
+function gift(age: number, sum: (arg: number) => void) {
+  const memberAge = age + 3;
+  sum(memberAge);
+}
+
+gift(40, (num) => console.log(num));
+```
+
+La fonction `gift` accepte 2 arguments : le 1st `age` est de type `number` et le 2nd est de type `function` acceptant un argument de type `number` et ne retournant rien (`void`).
 
 ## Union Types
 

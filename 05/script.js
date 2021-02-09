@@ -44,12 +44,32 @@ function gift(age: number) {
   return age + 3;
 }
 console.log(typeof gift(40));
-*/
-function gift(num) {
-    return num + 3;
+
+
+function gift(num: number) {
+  return num + 3;
 }
+
 gift(10); // 13
 console.log(typeof gift(10));
-var age;
+
+let age: (num: number) => number;
 age = gift;
 console.log(age(23)); // 26
+
+
+
+let colors = function (arg1: string, ...rest: string[]) {
+  console.log(...rest);
+};
+colors("green", "red", "orange", "purple", "black");
+
+
+function gift(age: number, sum: (arg: number) => void) {
+  const memberAge = age + 3;
+  sum(memberAge);
+}
+
+gift(40, (num) => console.log(num));
+
+*/
