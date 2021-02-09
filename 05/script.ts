@@ -72,4 +72,62 @@ function gift(age: number, sum: (arg: number) => void) {
 
 gift(40, (num) => console.log(num));
 
+
+function doSomething(arg1: number | string, arg2: number | string) {
+  let result;
+  if (typeof arg1 === "number" && typeof arg2 === "number") {
+    result = arg1 + arg2;
+  } else if (typeof arg1 === "string" && typeof arg2 === "string") {
+    result = arg1 + " " + arg2;
+  } else {
+    result = arg1.toString() + arg2.toString();
+  }
+
+  return result;
+}
+
+console.log(doSomething(10, 20)); // 30
+console.log(doSomething("Hello", "World")); // Hello World
+console.log(doSomething("Hello", 20)); // Hello20
+
 */
+
+type NumOrStr = number | string;
+type ObjIduser = { id: number; userName: NumOrStr };
+type ObjInvoice = { name: string; price: number };
+
+const currentUser = { id: 745623, userName: "Dupont" };
+
+let data: NumOrStr;
+let userId: NumOrStr;
+
+const welcome = (userName: number | string) => {
+  console.log("Bienvenue", userName);
+};
+
+welcome("Dupont");
+
+const getProfileData = (user: ObjIduser) => {
+  console.log(`
+    id: ${user.id}
+    userName: ${user.userName}
+  `);
+};
+
+getProfileData(currentUser);
+
+const invoice = (productName: ObjInvoice, user: ObjIduser) => {
+  console.log(`
+    Produit: ${productName.name}
+    Prix: ${productName.price}
+    Id Client: ${user.id}
+    Nom du client: ${user.userName}
+  `);
+};
+
+let productDetails = {
+  name: "Formation JS",
+  price: 149,
+};
+
+invoice(productDetails, currentUser);
