@@ -10,7 +10,7 @@ if ( user.level === 1) // le 1 ne représente rien de concret
 if (user.level === Level.ADMIN) // plus explicite
 ```
 
-exemple :
+Exemple :
 
 ```
 enum Level {
@@ -57,7 +57,7 @@ let userInfos: any = {
 userInfos = "quelque chose" // OK!
 ```
 
-Faille avec any:
+Faille avec `any`:
 
 ```
 let inputData: any
@@ -71,7 +71,7 @@ inputAge = inputData  // OK
 ## [Type Unknown](https://www.typescriptlang.org/docs/handbook/basic-types.html#unknown)
 
 Avec Unknown, TS défini un type comme étant inconnu.
-Comme le type, Unknown accepte tous les types.
+Comme le type, `Unknown` accepte tous les types.
 Pour pouvoir l'utiliser, il faut d'abord vérifier le type.
 
 ```
@@ -88,7 +88,7 @@ let inputAge: number
 inputAge = inputData  // Impossible d'assigner le type unknow au type number
 ```
 
-Unknow refuse tout en bloc.
+`Unknow` refuse tout en bloc.
 Pour l'utiliser, nous avons besoin d'une condition pour vérifier le type. Si c'est true => le type vérifié est attribué à la variable.
 
 ```
@@ -98,14 +98,14 @@ if (typeof inputData === 'number') {
 }
 ```
 
-A privilégier par rapport à any.
+A privilégier par rapport à `any`.
 
 ## [Type Void](https://www.typescriptlang.org/docs/handbook/basic-types.html#void)
 
-Void est égal au contraire de any, soit l'absence de type.
+Void est égal au contraire de `any`, soit l'absence de type.
 
 Une fonction retournant une valeur définit le type de la valeur retournée par inférence ou attribution.
-Une fonction qui ne retourne rien définit un type void pour Undefined.
+Une fonction qui ne retourne rien définit un type `void` pour Undefined.
 
 Privilégier l'inférence. TS choisit lui-même le bon type.
 Pas de return => void
@@ -114,7 +114,7 @@ Pour éviter les problèmes, laisser TS choisir le type (inférence) !
 
 ## [Type Function](https://www.typescriptlang.org/docs/handbook/functions.html#typing-the-function)
 
-Le Type Function => générique (doit être une fonction).
+Le `Type Function` => générique (doit être une fonction).
 
 Types bien spécifiques : doit être une fonction explicite => (param: type) => return type.
 
@@ -323,25 +323,89 @@ invoice(productDetails, currentUser);
 Le `Literal Type` précise et le `Type` et la `value`.
 
 ```
-function total(arg1: number, arg2: number, totalVersion: "getStringValue") {
-  let result
+type GetResultFormat = "getStringValue"|"getSquare"
 
-  if(totalVersion === "getStringValue") {
-    result = arg1.toString() + arg2.toString
+function total(arg1: number, arg2: number, totalVersion: GetResultFormat ) {
+  let result;
+
+  if (totalVersion === "getStringValue") {
+    result = arg1.toString() + arg2.toString;
   } else {
-    result = arg1 + arg2
+    result = arg1 + arg2;
   }
 }
 
-const totalOne = total(20, 10, "getStringValue")
-console.log(totalOne) // 2010
+const totalOne = total(20, 10, "getStringValue");
+console.log(totalOne); // 2010
 
-const totalTwo = total(20, 10, "getString") // TS Error
-console.log(totalOne) // 30
+const totalTwo = total(20, 10, "getString"); // TS Error: L'argument de type '"getString"' n'est pas attribuable au paramètre de type '"getStringValue"'.
+console.log(totalOne); // 30
 ```
 
 ## [Never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never)
 
+(cas rares)
+
+Le Type `never` est relativement nouveau dans TS. Il représente le type de valeurs qui ne se produisent jamais.
+Il est assignable à chaque type. Mais aucun type n'est assignable à un type `never`, même pas `any`.
+Contrairement au type `vois` qui ne s'applique que dans le cas d'une fonction qui retourne `undefined`, `never` indique que la fonction ne retourne jamais rien, même pas `undefined`.
+
+Il est utile lorsque que l'on souhaite capturer une erreur via `throw` ou dans le cas de boucles infinies.
+
+Cas d'usage => capter les erreurs
+
+```
+type AcceptedValues = string | number;
+
+function format(value: AcceptedValues) {
+  if (typeof value === "string") {
+    return value.length;
+  } else if (typeof value === "number") {
+    return value.toString();
+  } else {
+    const verifyCases: never = value; // TS Error
+  }
+}
+
+format("Hello");
+format(true); // TS Error: L'argument de type 'boolean' n'est pas attribuable au paramètre de type 'AcceptedValues'.
+```
+
 ## [Type Null et Undefined](https://www.typescriptlang.org/docs/handbook/basic-types.html#null-and-undefined)
 
+En TS, les types `undefined` et `null` ont en fait leurs types nommés respectivement `undefined` et `null`. Tout comme `void`, ils ne sont pas extrêmement utiles en eux-mêmes:
+
+```
+let u: undefined = undefined;
+let n: null = null;
+
+undefined + 200 // NaN
+
+const users: any = {}
+users.age // Undefined
+```
+
+Le Type `undefined` a une value `undefined`
+Le Type `null` a une value `undefined`, sauf si l'on précise sa value a `null`.
+
+On peut assigner une value `undefined` ou `null` a une variable de type `number` (seulement si le mode `strictNullChecks` dans le tsconfig.json n'est pas activé).
+
 ## [Type Assertions](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions)
+
+`Type assertions` a 2 syntaxes.
+
+1. la syntaxe `as`:
+
+```
+let someValue: unknown = "this is a string";
+
+let strLength: number = (someValue as string).length;Try
+```
+
+2. la syntaxe `angle-bracket`:
+
+```
+let someValue: unknown = "this is a string";
+
+let strLength: number = (<string>someValue).length;
+```

@@ -131,9 +131,10 @@ let productDetails = {
 
 invoice(productDetails, currentUser);
 
-*/
 
-function total(arg1: number, arg2: number, totalVersion: "getStringValue") {
+type GetResultFormat = "getStringValue" | "getSquare";
+
+function total(arg1: number, arg2: number, totalVersion: GetResultFormat) {
   let result;
 
   if (totalVersion === "getStringValue") {
@@ -146,5 +147,33 @@ function total(arg1: number, arg2: number, totalVersion: "getStringValue") {
 const totalOne = total(20, 10, "getStringValue");
 console.log(totalOne); // 2010
 
-const totalTwo = total(20, 10, "getString"); // TS Error
+const totalTwo = total(20, 10, "getString"); // TS Error: L'argument de type '"getString"' n'est pas attribuable au paramètre de type '"getStringValue"'.
 console.log(totalOne); // 30
+
+
+type AcceptedValues = string | number;
+
+function format(value: AcceptedValues) {
+  if (typeof value === "string") {
+    return value.length;
+  } else if (typeof value === "number") {
+    return value.toString();
+  } else {
+    const verifyCases: never = value; // TS Error
+  }
+}
+
+format("Hello");
+format(true); // TS Error: L'argument de type 'boolean' n'est pas attribuable au paramètre de type 'AcceptedValues'.
+
+*/
+
+function throwError(errMsg): never {
+  throw new Error(errMsg); // Stop
+}
+
+function getTotal(arg: number) {
+  if (arg < 5) {
+    return throwError("Attention, le total est < 5 !!!");
+  }
+}
