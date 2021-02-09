@@ -7,3 +7,9 @@
 - 05 - Bases de TS et les types de base 2
 - 06 - Les classes et les interfaces
 - 07 -
+- 08 -
+- 09 -
+- 10 -
+- 11 -
+- 12 -
+- 13 -
