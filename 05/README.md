@@ -411,3 +411,32 @@ let strLength: number = (<string>someValue).length;
 ```
 
 Les deux syntaxes sont équivalentes.Mais seule la syntaxe `as` est autorisée lorsque l'on fait du JSX.
+
+Cas d'usage: on veut récupérer un élément du DOM
+
+```
+const form = document.getElementById("signupForm");
+console.log(form?.children);
+```
+
+ou avec le `Type Assertions`
+
+```
+const form = document.getElementById("signupForm") as HTMLFormElement
+console.log(form.children);
+```
+
+Exemple:
+
+```
+const form = document.getElementById("signupForm") as HTMLFormElement;
+const firstName = document.getElementById("firstname") as HTMLInputElement;
+const old = document.getElementById("age") as HTMLInputElement;
+const gender = document.getElementById("gender") as HTMLSelectElement;
+
+form.addEventListener("submit", (e: Event) => {
+  e.preventDefault();
+
+  console.log(firstName.value, old.valueAsNumber, gender.value);
+});
+```
