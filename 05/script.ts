@@ -90,7 +90,6 @@ console.log(doSomething(10, 20)); // 30
 console.log(doSomething("Hello", "World")); // Hello World
 console.log(doSomething("Hello", 20)); // Hello20
 
-*/
 
 type NumOrStr = number | string;
 type ObjIduser = { id: number; userName: NumOrStr };
@@ -131,3 +130,21 @@ let productDetails = {
 };
 
 invoice(productDetails, currentUser);
+
+*/
+
+function total(arg1: number, arg2: number, totalVersion: "getStringValue") {
+  let result;
+
+  if (totalVersion === "getStringValue") {
+    result = arg1.toString() + arg2.toString;
+  } else {
+    result = arg1 + arg2;
+  }
+}
+
+const totalOne = total(20, 10, "getStringValue");
+console.log(totalOne); // 2010
+
+const totalTwo = total(20, 10, "getString"); // TS Error
+console.log(totalOne); // 30

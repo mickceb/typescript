@@ -318,7 +318,27 @@ let productDetails = {
 invoice(productDetails, currentUser);
 ```
 
-## Literal Types
+## [Literal Types](https://www.typescriptlang.org/docs/handbook/literal-types.html)
+
+Le `Literal Type` précise et le `Type` et la `value`.
+
+```
+function total(arg1: number, arg2: number, totalVersion: "getStringValue") {
+  let result
+
+  if(totalVersion === "getStringValue") {
+    result = arg1.toString() + arg2.toString
+  } else {
+    result = arg1 + arg2
+  }
+}
+
+const totalOne = total(20, 10, "getStringValue")
+console.log(totalOne) // 2010
+
+const totalTwo = total(20, 10, "getString") // TS Error
+console.log(totalOne) // 30
+```
 
 ## [Never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never)
 

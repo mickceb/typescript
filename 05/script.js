@@ -90,23 +90,58 @@ console.log(doSomething(10, 20)); // 30
 console.log(doSomething("Hello", "World")); // Hello World
 console.log(doSomething("Hello", 20)); // Hello20
 
-*/
-var currentUser = { id: 745623, userName: "Dupont" };
-var data;
-var userId;
-var welcome = function (userName) {
-    console.log("Bienvenue", userName);
+
+type NumOrStr = number | string;
+type ObjIduser = { id: number; userName: NumOrStr };
+type ObjInvoice = { name: string; price: number };
+
+const currentUser = { id: 745623, userName: "Dupont" };
+
+let data: NumOrStr;
+let userId: NumOrStr;
+
+const welcome = (userName: number | string) => {
+  console.log("Bienvenue", userName);
 };
+
 welcome("Dupont");
-var getProfileData = function (user) {
-    console.log("\n    id: " + user.id + "\n    userName: " + user.userName + "\n  ");
+
+const getProfileData = (user: ObjIduser) => {
+  console.log(`
+    id: ${user.id}
+    userName: ${user.userName}
+  `);
 };
+
 getProfileData(currentUser);
-var invoice = function (productName, user) {
-    console.log("\n    Produit: " + productName.name + "\n    Prix: " + productName.price + "\n    Id Client: " + user.id + "\n    Nom du client: " + user.userName + "\n  ");
+
+const invoice = (productName: ObjInvoice, user: ObjIduser) => {
+  console.log(`
+    Produit: ${productName.name}
+    Prix: ${productName.price}
+    Id Client: ${user.id}
+    Nom du client: ${user.userName}
+  `);
 };
-var productDetails = {
-    name: "Formation JS",
-    price: 149
+
+let productDetails = {
+  name: "Formation JS",
+  price: 149,
 };
+
 invoice(productDetails, currentUser);
+
+*/
+function total(arg1, arg2, totalVersion) {
+    var result;
+    if (totalVersion === "getStringValue") {
+        result = arg1.toString() + arg2.toString;
+    }
+    else {
+        result = arg1 + arg2;
+    }
+}
+var totalOne = total(20, 10, "getStringValue");
+console.log(totalOne); // 2010
+var totalTwo = total(20, 10, "getString"); // TS Error
+console.log(totalOne); // 30
