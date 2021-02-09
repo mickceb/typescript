@@ -409,3 +409,5 @@ let someValue: unknown = "this is a string";
 
 let strLength: number = (<string>someValue).length;
 ```
+
+Les deux syntaxes sont équivalentes.Mais seule la syntaxe `as` est autorisée lorsque l'on fait du JSX.

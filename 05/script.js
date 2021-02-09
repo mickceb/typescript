@@ -166,12 +166,15 @@ function format(value: AcceptedValues) {
 format("Hello");
 format(true); // TS Error: L'argument de type 'boolean' n'est pas attribuable au paramètre de type 'AcceptedValues'.
 
+
+function throwError(errMsg): never {
+  throw new Error(errMsg); // Stop
+}
+
+function getTotal(arg: number) {
+  if (arg < 5) {
+    return throwError("Attention, le total est < 5 !!!");
+  }
+}
+
 */
-function throwError(errMsg) {
-    throw new Error(errMsg); // Stop
-}
-function getTotal(arg) {
-    if (arg < 5) {
-        return throwError("Attention, le total est < 5 !!!");
-    }
-}
